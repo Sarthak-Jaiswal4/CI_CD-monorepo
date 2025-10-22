@@ -1,0 +1,15 @@
+# Ignore local dependencies
+node_modules
+**/node_modules
+
+# Ignore build outputs
+dist
+.next
+
+# Ignore git
+.git
+.gitignore
+
+# Ignore local env and temp files
+.env
+*.log
