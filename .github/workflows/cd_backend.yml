@@ -24,6 +24,6 @@ jobs:
           context: .
           file: ./docker/Dockerfile.backend
           push: true
-          tags: sarthjazz/todo-app-backend:${{ github.sha }}
+          tags: sarthakjazz/todo-app-backend:${{ github.sha }}
 
     
