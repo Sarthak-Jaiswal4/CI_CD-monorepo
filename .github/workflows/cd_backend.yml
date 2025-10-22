@@ -2,7 +2,7 @@ name: Deploy the backend
 on: 
   push:
       branch: [main]
-job:
+jobs:
   build:
     runs-on: ubuntu-latest
     steps:
