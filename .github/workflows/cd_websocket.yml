@@ -23,22 +23,22 @@ jobs:
           push: true
           tags: sarthakjazz/todo-app-websocket:${{ github.sha }}
 
-      - name: Deploy to AWS Ubuntu Server
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
-          chmod 600 ~/ssh_key
+      # - name: Deploy to AWS Ubuntu Server
+      #   run: |
+      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+      #     chmod 600 ~/ssh_key
           
-          # Stop existing container
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker stop websocket || true"
+      #     # Stop existing container
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker stop websocket || true"
           
-          # Remove existing container
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker rm websocket || true"
+      #     # Remove existing container
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker rm websocket || true"
           
-          # Pull latest image
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker pull sarthakjazz/todo-app-websocket:${{ github.sha }}"
+      #     # Pull latest image
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker pull sarthakjazz/todo-app-websocket:${{ github.sha }}"
           
-          # Run new container
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker run -d --name websocket -p 8080:8080 sarthakjazz/todo-app-websocket:${{ github.sha }}"
+      #     # Run new container
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker run -d --name websocket -p 8080:8080 sarthakjazz/todo-app-websocket:${{ github.sha }}"
           
-          # Clean up old images
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker image prune -f"
+      #     # Clean up old images
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker image prune -f"
