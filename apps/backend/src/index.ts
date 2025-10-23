@@ -3,7 +3,10 @@ import {prismaclient} from '@DB'
 
 const app=express()
 
-app.post('/register', async (req: Request, res: Response) => {
+app.use(express.json())
+
+app.post('/register', async (req, res) => {
+    console.log(req.body)
     const { username, password } = req.body;
 
     try {
