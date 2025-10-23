@@ -34,6 +34,8 @@ COPY --from=builder /app/packages ./packages
 COPY --from=builder /app/apps/backend/dist ./apps/backend/dist
 COPY --from=builder /app/apps/backend/package.json ./apps/backend/package.json
 
+RUN pnpm install --filter=backend --frozen-lockfile
+
 EXPOSE 3001
 
 CMD ["node", "apps/backend/dist/index.js"]
