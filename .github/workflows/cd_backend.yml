@@ -25,11 +25,11 @@ jobs:
 
       - name: Deploy to AWS Ubuntu Server
         run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
-          chmod 600 ~/ssh_key
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+          chmod 700 /home/runner/ssh_key
           
           # Stop existing container
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker stop backend || true"
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} -t "docker stop backend || true"
           
           # Remove existing container
           ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker rm backend || true"
