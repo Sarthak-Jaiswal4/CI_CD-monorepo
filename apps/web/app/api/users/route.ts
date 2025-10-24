@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
-import { prismaClient } from '@DB'
+import { prisma } from '@DB'
 
 export async function GET() {
   try {
-    const users = await prismaClient.user.findMany()
+    const users = await prisma.user.findMany()
     return NextResponse.json(users)
   } catch (error) {
     console.error('Error fetching users:', error)
