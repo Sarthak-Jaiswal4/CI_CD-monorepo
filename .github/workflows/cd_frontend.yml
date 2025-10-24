@@ -24,5 +24,3 @@ jobs:
           tags: sarthakjazz/todo-app-frontend:${{ github.sha }}
           build-args: |
             DATABASE_URL=${{ secrets.DATABASE_URL }}
-
-    

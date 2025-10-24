@@ -25,9 +25,16 @@ FROM node:20-alpine AS runner
 RUN npm install -g pnpm
 WORKDIR /app
 
-COPY --from=builder /app/apps/ws/package.json ./
-COPY --from=builder /app/apps/ws/dist ./dist
+COPY --from=builder /app/package.json ./package.json
+COPY --from=builder /app/pnpm-workspace.yaml ./pnpm-workspace.yaml
+COPY --from=builder /app/pnpm-lock.yaml ./pnpm-lock.yaml
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/packages ./packages
+COPY --from=builder /app/apps/ws/dist ./apps/ws/dist
+COPY --from=builder /app/apps/ws/package.json ./apps/ws/package.json
 
-EXPOSE 8080
+RUN pnpm install --filter=ws --frozen-lockfile
 
-CMD ["node", "dist/index.js"]
+EXPOSE 3001
+
+CMD ["node", "apps/ws/dist/index.js"]
