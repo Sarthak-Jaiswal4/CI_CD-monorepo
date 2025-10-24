@@ -1,5 +1,5 @@
 import WebSocket, { WebSocketServer } from 'ws';
-import { prismaclient } from '@DB'
+import { prismaClient } from '@DB'
 
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 
@@ -10,7 +10,7 @@ wss.on('connection', function connection(ws: WebSocket) {
 
   (async () => {
     try {
-      const user = await prismaclient.user.create({
+      const user = await prismaClient.user.create({
         data: {
           username: Math.random().toString(),
           password: Math.random().toString()

@@ -35,6 +35,6 @@ COPY --from=builder /app/apps/ws/package.json ./apps/ws/package.json
 
 RUN pnpm install --filter=ws --frozen-lockfile
 
-EXPOSE 3001
+EXPOSE 8080
 
 CMD ["node", "apps/ws/dist/index.js"]

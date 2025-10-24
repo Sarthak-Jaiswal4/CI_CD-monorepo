@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express'
-import {prismaclient} from '@DB'
+import {prismaClient} from '@DB'
 
 const app=express()
 
@@ -10,7 +10,7 @@ app.post('/register', async (req, res) => {
     const { username, password } = req.body;
 
     try {
-        const user = await prismaclient.user.create({
+        const user = await prismaClient.user.create({
             data: { username, password }
         });
         res.status(201).json({ message: 'User registered successfully', user });
@@ -23,7 +23,7 @@ app.post('/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     try {
-        const user = await prismaclient.user.findUnique({
+        const user = await prismaClient.user.findUnique({
             where: { username }
         });
         if (!user || user.password !== password) {

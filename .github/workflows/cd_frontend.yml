@@ -24,3 +24,18 @@ jobs:
           tags: sarthakjazz/todo-app-frontend:${{ github.sha }}
           build-args: |
             DATABASE_URL=${{ secrets.DATABASE_URL }}
+
+      - name: Deploy to VM
+        run: |
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
+          chmod 600 ~/ssh_key
+
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker stop frontend || true"
+
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker rm frontend || true"
+
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker pull sarthakjazz/todo-app-frontend:${{ github.sha }}"
+
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker run -d -e DATABASE_URL='${{ secrets.DATABASE_URL }}' --name frontend -p 3000:3000 sarthakjazz/todo-app-frontend:${{ github.sha }}"
+
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker image prune -f"

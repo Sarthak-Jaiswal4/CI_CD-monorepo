@@ -9,14 +9,14 @@
     "start": "next start",
     "lint": "next lint --max-warnings 0",
     "check-types": "tsc --noEmit",
-    "db:migrate":"cd ../..packages/DB && pnpm prisma generate && cd ../apps/web"
+    "db:migrate": "cd ../..packages/DB && pnpm prisma generate && cd ../apps/web"
   },
   "dependencies": {
+    "@DB": "workspace:*",
     "@repo/ui": "workspace:*",
     "next": "^15.5.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0",
-    "@DB": "workspace:*"
+    "react-dom": "^19.1.0"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
