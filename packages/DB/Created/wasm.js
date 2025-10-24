@@ -149,7 +149,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../.env"
   },
   "relativePath": "../prisma",
@@ -168,8 +168,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../Created\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String @unique @default(uuid())\n  username String @unique\n  password String\n  Todo     Todo[]\n}\n\nmodel Todo {\n  id          String  @unique @default(uuid())\n  task        String\n  isCompleted Boolean @default(false)\n  userId      String\n  admin       User    @relation(fields: [userId], references: [id])\n}\n",
-  "inlineSchemaHash": "ba44c44b38673dcd50b19df84cf6879ccf922c600616a2c6d82bf40c672735df",
+  "inlineSchema": "generator client {\n  provider   = \"prisma-client-js\"\n  output     = \"../Created\"\n  engineType = \"node-api\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String @unique @default(uuid())\n  username String @unique\n  password String\n  Todo     Todo[]\n}\n\nmodel Todo {\n  id          String  @unique @default(uuid())\n  task        String\n  isCompleted Boolean @default(false)\n  userId      String\n  admin       User    @relation(fields: [userId], references: [id])\n}\n",
+  "inlineSchemaHash": "2d421f7375ca19a55764daaac79b27c4a9f1328f91ef2ff767f2a60cbc990151",
   "copyEngine": true
 }
 config.dirname = '/'
