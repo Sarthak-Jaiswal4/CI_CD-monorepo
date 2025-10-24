@@ -9,12 +9,11 @@
     },
     "web#build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "inputs": ["$TURBO_DEFAULT$", "packages/DB/.env"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [
         "DATABASE_URL",
-        "PRISMA_FORCE_NAPI",
-        "NEXT_PUBLIC_API_URL"
+        "PRISMA_FORCE_NAPI"
       ]
     },
     "lint": {
