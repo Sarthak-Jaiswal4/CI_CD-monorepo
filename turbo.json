@@ -2,6 +2,9 @@
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
   "tasks": {
+    "db:generate":{
+      "cache":false
+    },
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
@@ -9,7 +12,7 @@
     },
     "web#build": {
       "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", "packages/DB/.env"],
+      "inputs": ["$TURBO_DEFAULT$", ".env"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [
         "DATABASE_URL",
