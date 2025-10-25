@@ -21,26 +21,28 @@ jobs:
           context: .
           file: ./docker/Dockerfile.backend
           push: true
-          tags: sarthakjazz/todo-app-backend:${{ github.sha }}
+          tags: |
+            sarthakjazz/todo-app-frontend:${{ github.sha }}
+            sarthakjazz/todo-app-frontend:latest
 
-      - name: Deploy to AWS Ubuntu Server
-        run: |
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
-          chmod 700 /home/runner/ssh_key
+      # - name: Deploy to AWS Ubuntu Server
+      #   run: |
+      #     echo "${{ secrets.SSH_PRIVATE_KEY }}" &> ~/ssh_key
+      #     chmod 700 /home/runner/ssh_key
           
-          # Stop existing container
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker stop backend || true"
+      #     # Stop existing container
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker stop backend || true"
           
-          # Remove existing container
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker rm backend || true"
+      #     # Remove existing container
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker rm backend || true"
           
-          # Pull latest image
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker pull sarthakjazz/todo-app-backend:${{ github.sha }}"
+      #     # Pull latest image
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker pull sarthakjazz/todo-app-backend:${{ github.sha }}"
           
-          # Run new container
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker run -d -e DATABASE_URL='${{ secrets.DATABASE_URL }}' --name backend -p 3001:3001 sarthakjazz/todo-app-backend:${{ github.sha }}"
+      #     # Run new container
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker run -d -e DATABASE_URL='${{ secrets.DATABASE_URL }}' --name backend -p 3001:3001 sarthakjazz/todo-app-backend:${{ github.sha }}"
           
-          # Clean up old images
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker image prune -f"
+      #     # Clean up old images
+      #     ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker image prune -f"
 
     
