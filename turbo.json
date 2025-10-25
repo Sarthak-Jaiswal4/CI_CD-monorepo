@@ -2,16 +2,16 @@
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
   "tasks": {
-    "db:generate":{
+    "postinstall":{
       "cache":false
     },
     "build": {
-      "dependsOn": ["^build","^db:generate"],
+      "dependsOn": ["^build","^postinstall"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**"]
     },
     "web#build": {
-      "dependsOn": ["^build","^db:generate"],
+      "dependsOn": ["^build","^postinstall"],
       "inputs": ["$TURBO_DEFAULT$", ".env"],
       "outputs": [".next/**", "!.next/cache/**"],
       "env": [

@@ -135,7 +135,7 @@ const config = {
       "fromEnvVar": null
     },
     "config": {
-      "engineType": "library"
+      "engineType": "client"
     },
     "binaryTargets": [
       {
@@ -149,7 +149,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
@@ -168,8 +168,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider   = \"prisma-client-js\"\n  output     = \"../generated/client\"\n  engineType = \"node-api\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String @unique @default(uuid())\n  username String @unique\n  password String\n  Todo     Todo[]\n}\n\nmodel Todo {\n  id          String  @unique @default(uuid())\n  task        String\n  isCompleted Boolean @default(false)\n  userId      String\n  admin       User    @relation(fields: [userId], references: [id])\n}\n",
-  "inlineSchemaHash": "a11f32882090a66248593bff0570310752415b3cd3434c74d0f94e03612c060e",
+  "inlineSchema": "generator client {\n  provider   = \"prisma-client-js\"\n  output     = \"../generated/client\"\n  engineType = \"client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id       String @unique @default(uuid())\n  username String @unique\n  password String\n  Todo     Todo[]\n}\n\nmodel Todo {\n  id          String  @unique @default(uuid())\n  task        String\n  isCompleted Boolean @default(false)\n  userId      String\n  admin       User    @relation(fields: [userId], references: [id])\n}\n",
+  "inlineSchemaHash": "263fbf5911abd9bb75989be53c5a84d87dcebf43a9d787430964d09a4317ac7a",
   "copyEngine": true
 }
 config.dirname = '/'
