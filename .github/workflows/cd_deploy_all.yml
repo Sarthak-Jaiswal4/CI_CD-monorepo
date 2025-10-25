@@ -27,6 +27,4 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/ssh_key
           chmod 600 ~/ssh_key
 
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker compose pull"
-
-          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "docker compose up -d"
+          ssh -o StrictHostKeyChecking=no -i ~/ssh_key ubuntu@${{ secrets.WS_AWS_SERVER_IP }} "cd /home/ubuntu/docker-compose.yml && docker compose pull && docker compose up -d"
