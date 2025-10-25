@@ -33,6 +33,8 @@ COPY --from=builder /app/packages ./packages
 COPY --from=builder /app/apps/ws/dist ./apps/ws/dist
 COPY --from=builder /app/apps/ws/package.json ./apps/ws/package.json
 
+RUN pnpm install --frozen-lockfile
+
 EXPOSE 8080
 
 CMD ["node", "apps/ws/dist/index.js"]
