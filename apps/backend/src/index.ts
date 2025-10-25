@@ -35,6 +35,16 @@ app.post('/login', async (req: Request, res: Response) => {
     }
 });
 
+app.get('/users', async (req: Request, res: Response) => {
+    try {
+        const users = await prisma.user.findMany();
+        res.json(users);
+    } catch (error) {
+        res.status(500).json({ message: 'Failed to fetch users', error });
+    }
+});
+
+
 app.listen(3001,()=>{
     console.log('Connected to port 3001')
 })
