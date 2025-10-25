@@ -3,7 +3,8 @@ import { prisma } from '@DB'
 
 export async function GET() {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/users`)
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL?.trim() || 'http://backend:3001';
+    const response = await fetch(`${apiUrl}/users`);
     const users = await response.json()
     return NextResponse.json(users)
   } catch (error) {
