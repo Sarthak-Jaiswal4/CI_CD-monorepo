@@ -7,7 +7,7 @@
     ".": "./src/index.ts"
   },
   "scripts": {
-    "postinstall":"prisma generate"
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -17,7 +17,9 @@
     "@types/node": "^22.15.3"
   },
   "dependencies": {
+    "@prisma/adapter-neon": "^6.18.0",
     "@prisma/client": "6.17.1",
+    "dotenv": "^17.2.3",
     "prisma": "^6.17.1",
     "typescript": "^5.9.3"
   }
