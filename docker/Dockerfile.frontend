@@ -16,7 +16,7 @@ COPY ./apps/web ./apps/web
 
 RUN pnpm install --frozen-lockfile
 
-RUN pnpm run postinstall
+RUN pnpm run db:migrate
 
 RUN DATABASE_URL=${DATABASE_URL} pnpm run build --filter=web
 
