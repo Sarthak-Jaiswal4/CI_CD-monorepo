@@ -1,5 +1,6 @@
 "use client"
 
+import { prisma } from '@DB'
 import { useEffect, useState } from 'react'
 
 interface User {
@@ -10,46 +11,46 @@ interface User {
   updatedAt: Date
 }
 
-export default function Home() {
-  const [users, setUsers] = useState<User[]>([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+export default async function Home() {
+  // const [users, setUsers] = useState<User[]>([])
+  // const [loading, setLoading] = useState(true)
+  // const [error, setError] = useState<string | null>(null)
+  const users=await prisma.user.findMany()
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       setLoading(true)
+  //       const response = await fetch('/api/users')
+  //       if (!response.ok) {
+  //         throw new Error('Failed to fetch users')
+  //       }
+  //       const data = await response.json()
+  //       setUsers(data)
+  //     } catch (err) {
+  //       setError(err instanceof Error ? err.message : 'An error occurred')
+  //     } finally {
+  //       setLoading(false)
+  //     }
+  //   }
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        setLoading(true)
-        const response = await fetch('/api/users')
-        if (!response.ok) {
-          throw new Error('Failed to fetch users')
-        }
-        const data = await response.json()
-        setUsers(data)
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
-      } finally {
-        setLoading(false)
-      }
-    }
+  //   fetchUsers()
+  // }, [])
 
-    fetchUsers()
-  }, [])
+  // if (loading) {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-screen">
+  //       <div className="text-lg">Loading...</div>
+  //     </div>
+  //   )
+  // }
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-lg">Loading...</div>
-      </div>
-    )
-  }
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="text-red-500">Error: {error}</div>
-      </div>
-    )
-  }
+  // if (error) {
+  //   return (
+  //     <div className="flex items-center justify-center min-h-screen">
+  //       <div className="text-red-500">Error: {error}</div>
+  //     </div>
+  //   )
+  // }
 
   return (
     <div className="p-8">
